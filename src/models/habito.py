@@ -1,13 +1,32 @@
-class Habito:
-    def __init__(self,nombre,meta_diaria):
-        self.nombre = nombre
-        self.meta_diaria = meta_diaria
-        self.progreso_actual = 0
-        self.completado = False
+from dataclasses import dataclass
+from typing import Any
 
-    def registrar_progreso(self,cantidad):
-        self.progreso_actual+=cantidad
-        print(f"Sumaste {cantidad} a {self.nombre}. Progreso: {self.progreso_actual}/{self.meta_diaria}")
-        if self.progreso_actual>=self.meta_diaria:
-            self.completado = True
-            print(f"¡Habito {self.nombre} completado por hoy!")
+@dataclass
+class Habito:
+    nombre: str
+    meta_diaria: float
+    progreso_actual: float = 0
+    completado: bool = False
+    categoria: str = "salud" 
+
+    def registrar_progreso(self,cantidad:float) -> bool:
+        if cantidad <= 0:
+            return False
+        self.progreso_actual += cantidad
+        if self.progreso_actual >= self.meta_diaria:
+            self.completado=True
+        return True
+
+    def resetear_dia(self) -> None:
+        #TODO: progreso_acutal pasa a 0, y completado pasa a False
+        pass
+
+    def to_dict(self) -> dict[str, Any]:
+        #TODO: devuelvo un diccionario con las 5 claves y sus valores
+        pass
+
+    @classmethod
+    def from_dict(cls,data:dict[str,Any]) -> "Habito":
+        #TODO: devuelve cls(...) leyendo cada clave de data
+        pass
+    
