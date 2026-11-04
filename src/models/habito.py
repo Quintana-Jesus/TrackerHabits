@@ -18,16 +18,24 @@ class Habito:
         return True
 
     def resetear_dia(self) -> None:
-        self.progreso_actual=0
-        self.completado=False
+        self.progreso_actual = 0
+        self.completado = False
 
     def to_dict(self) -> dict[str, Any]:
-        # TODO: devuelvo un diccionario con las 5 claves y sus valores
-        
-        pass
+        return {
+            "nombre": self.nombre,
+            "meta_diaria": self.meta_diaria,
+            "progreso_actual": self.progreso_actual,
+            "completado": self.completado,
+            "categoria": self.categoria,
+        }
 
     @classmethod
     def from_dict(cls ,data:dict[str,Any]) -> "Habito":
-        # TODO: devuelve cls(...) leyendo cada clave de data
-        pass
-    
+        return cls(
+            nombre=data["nombre"],
+            meta_diaria=data["meta_diaria"],
+            progreso_actual=data["progreso_actual"],
+            completado=data["completado"],
+            categoria=data["categoria"],
+        )
