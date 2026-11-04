@@ -1,0 +1,9 @@
+# Archivos de entorno y notas personales
+notas
+.env
+.venv/
+__pycache__/
+*.pyc
+
+# Datos persistentes generados en ejecución
+data/*.json

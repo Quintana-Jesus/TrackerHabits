@@ -1,5 +1,5 @@
-from schemas.habito import Habito
-from schemas.usuario import Usuario
+from src.models.habito import Habito
+from src.models.usuario import Usuario
 
 nombre_ingresado = input("Ingrese su nombre: ")
 edad_ingresada = input("Digite su edad: ")
