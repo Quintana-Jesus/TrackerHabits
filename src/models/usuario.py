@@ -55,14 +55,18 @@ class Usuario:
         }
 
     def to_dict(self) -> dict[str, Any]:
-        """Convierte el usuario (y su rutina) a un diccionario."""
-        # TODO: "nombre", "edad" y "rutina": una lista por comprensión
-        #       con h.to_dict() por cada hábito
-        pass
+        return {
+            "nombre": self.nombre,
+            "edad": self.edad,
+            "rutina": [h.to_dict() for h in self.rutina],
+        }
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> "Usuario":
-        """Crea un Usuario (y sus hábitos) desde un diccionario."""
-        # TODO: reconstruye la rutina con Habito.from_dict por cada
-        #       elemento de data.get("rutina", []), y devuelve cls(...)
-        pass
+        rutina = [Habito.from_dict(d) for d in data.get("rutina", [])]
+        return cls(
+            nombre=data["nombre"],
+            edad=data["edad"],
+            rutina=rutina, 
+        )
+    
