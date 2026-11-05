@@ -17,7 +17,9 @@ class Usuario:
         self.rutina.append(habito)
 
     def eliminar_habito(self, nombre: str) -> bool:
+    da
         # TODO: Recorre la rutina, si encuentra habito, se quita con self.rutina.remove(habito) y devuelve True
+         
         # TODO: si termina el for sin encontrarlo devuelve False
         pass
 
