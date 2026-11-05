@@ -23,11 +23,6 @@ class Usuario:
                 return True
         return False
 
-    def editar_habito(self, nombre: str) -> None:
-        # TODO 1: Recorre la rutina, si encuentra habito, obtiene su json con to_dict
-        # TODO  : lo modifica y luego lo devuelve con from_dict
-        pass
-
     def obtener_porcentaje_global(self) -> float:
         if len(self.rutina) == 0:
             return 0.0
