@@ -17,11 +17,11 @@ class Usuario:
         self.rutina.append(habito)
 
     def eliminar_habito(self, nombre: str) -> bool:
-    da
-        # TODO: Recorre la rutina, si encuentra habito, se quita con self.rutina.remove(habito) y devuelve True
-         
-        # TODO: si termina el for sin encontrarlo devuelve False
-        pass
+        for habito in self.rutina:
+            if habito.nombre.lower() == nombre.lower():
+                self.rutina.remove(habito)
+                return True
+        return False
 
     def editar_habito(self, nombre: str) -> None:
         # TODO 1: Recorre la rutina, si encuentra habito, obtiene su json con to_dict
@@ -29,13 +29,13 @@ class Usuario:
         pass
 
     def obtener_porcentaje_global(self) -> float:
-        """Calcula el progreso promedio de todos los hábitos (0 a 100)."""
-        # TODO 1: si la rutina está vacía, devuelve 0.0 (evita dividir entre cero)
-        # TODO 2: por cada hábito calcula su porcentaje:
-        #         min(progreso_actual / meta_diaria, 1) * 100
-        #         (min limita a 100 si te pasaste de la meta)
-        # TODO 3: suma todos y divide entre la cantidad de hábitos
-        pass
+        if len(self.rutina) == 0:
+            return 0.0
+        total=0.0
+        for habito in self.rutina:
+            porcentaje = min(habito.progreso_actual / habito.meta_diaria, 1) * 100
+            total += porcentaje
+        return total / len(self.rutina)
 
     def obtener_resumen_dia(self) -> dict[str, Any]:
         """Devuelve un resumen con totales del día."""
