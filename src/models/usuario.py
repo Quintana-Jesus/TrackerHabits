@@ -37,11 +37,22 @@ class Usuario:
             total += porcentaje
         return total / len(self.rutina)
 
-    def obtener_resumen_dia(self) -> dict[str, Any]:
-        """Devuelve un resumen con totales del día."""
-        # TODO: diccionario con las claves "total", "completados",
-        #       "pendientes" y "porcentaje_global"
-        pass
+    def obtener_resumen_dia(self) -> dict[str, Any]: 
+        total = len(self.rutina)
+        completados=0
+        pendientes=0
+        for habito in self.rutina:
+            if habito.completado:
+                completados += 1
+            else:
+                pendientes+=1
+        porcentaje = self.obtener_porcentaje_global()
+        return {
+            "total": total,
+            "completados": completados,
+            "pendientes": pendientes,
+            "porcentaje_global": porcentaje,
+        }
 
     def to_dict(self) -> dict[str, Any]:
         """Convierte el usuario (y su rutina) a un diccionario."""
