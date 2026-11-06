@@ -44,17 +44,41 @@ class Menu:
 
     def ejecutar(self) -> None:
         # TODO: while True:
-        #   - self._mostrar_menu()
-        #   - opcion = input("Elige una opción: ").strip()
-        #   - if opcion == "1": self._ver_resumen()
-        #   - elif opcion == "6": print("¡Hasta luego!") y break
-        #   - else: print("Opción no válida.")
-        pass
+        while True:
+            self._mostrar_menu()
+            opcion = input("Elige una opción: ").strip()
+            if opcion == "1": 
+                self._ver_resumen()
+            elif opcion == "6": 
+                print ("Hasta luego!")
+                break
+            else: 
+                print("Opcion no valida.")
 
     def _mostrar_menu(self) -> None:
-        # TODO: imprime el SEPARADOR, el título y las 6 opciones
-        pass
+        print(SEPARADOR)
+        print("\n  Tracker Hábitos y Bienestar  \n")
+        print(SEPARADOR)
+        print(" 1. Ver resumen del día")
+        print(" 2. Registrar progreso en un hábito")
+        print(" 3. Crear nuevo hábito")
+        print(" 4. Eliminar hábito")
+        print(" 5. Frase motivacional del día")
+        print(" 6. Guardar y salir")
+        print(SEPARADOR)
 
     def _ver_resumen(self) -> None:
-        # TODO: ver los pasos abajo
-        pass
+        resumen = self.usuario.obtener_resumen_dia()
+        print(SEPARADOR)
+        print(f"Resumen de {self.usuario.nombre}")
+        print(
+            f"Hábitos: {resumen['total']} | "
+            f"Completados: {resumen['completados']} | "
+            f"Pendientes: {resumen['pendientes']}"
+        )
+        print(renderizar_barra(resumen["porcentaje_global"]))
+        # TODO: por cada hábito de self.usuario.rutina, imprime una línea
+        #       con su nombre y su progreso, por ejemplo: " - Beber agua: 8/8"
+        print(SEPARADOR)
+
+
