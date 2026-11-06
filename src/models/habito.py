@@ -35,7 +35,7 @@ class Habito:
         return cls(
             nombre=data["nombre"],
             meta_diaria=data["meta_diaria"],
-            progreso_actual=data["progreso_actual"],
-            completado=data["completado"],
-            categoria=data["categoria"],
+            progreso_actual=data.get("progreso_actual", 0),
+            completado=data.get("completado", False),
+            categoria=data.get("categoria"),
         )
