@@ -11,8 +11,8 @@ class Usuario:
     rutina: list[Habito] = field(default_factory=list)
 
     def anadir_habito(self, habito: Habito) -> None:
-        for existente in self.rutina:
-            if existente.nombre.lower() == habito.nombre.lower():
+        for elemento_existente in self.rutina:
+            if elemento_existente.nombre.lower() == habito.nombre.lower():
                 raise ValueError("Ya existe un habito con ese nombre en tu rutina")
         self.rutina.append(habito)
 
