@@ -11,7 +11,7 @@ def renderizar_barra(porcentaje: float) -> str:
     porcentaje = max(0, min(porcentaje, 100))
     llenos = int((porcentaje * ANCHO_BARRA) / 100)
     vacios = ANCHO_BARRA - llenos
-    return f"[{"█"* llenos}{"░"*vacios}] {porcentaje:.1f}%"
+    return f"[{'█'* llenos}{'░'*vacios}] {porcentaje:.1f}%"
 
 
 
@@ -32,7 +32,7 @@ def pedir_numero(mensaje: str) -> float:
 class Menu:
     def __init__(
             self,
-            usuario: Usuario, 
+            usuario: Usuario,
             storage: StorageService,
             quotes: QuoteService,
             filepath: str,
@@ -47,12 +47,12 @@ class Menu:
         while True:
             self._mostrar_menu()
             opcion = input("Elige una opción: ").strip()
-            if opcion == "1": 
+            if opcion == "1":
                 self._ver_resumen()
             elif opcion == "6": 
                 print ("Hasta luego!")
                 break
-            else: 
+            else:
                 print("Opcion no valida.")
 
     def _mostrar_menu(self) -> None:
@@ -77,6 +77,8 @@ class Menu:
             f"Pendientes: {resumen['pendientes']}"
         )
         print(renderizar_barra(resumen["porcentaje_global"]))
+        for habito in self.usuario.rutina:
+            f"{habito.nombre}: {habito.progreso_actual}/{habito.meta_diaria} "
         # TODO: por cada hábito de self.usuario.rutina, imprime una línea
         #       con su nombre y su progreso, por ejemplo: " - Beber agua: 8/8"
         print(SEPARADOR)
