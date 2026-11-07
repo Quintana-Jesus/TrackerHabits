@@ -119,7 +119,7 @@ class Menu:
         else:
             print("Genial! Estas mas cerca de completar tu hábito.")
 
-    def _crear_habito(self, se) -> None:
+    def _crear_habito(self) -> None:
         nombre = pedir_texto("Ingrese el nombre del habito: ")
         meta = pedir_numero("Digite su meta: ")
         habito = Habito(nombre, meta)
