@@ -1,4 +1,5 @@
 from src.models.usuario import Usuario
+from src.models.habito import Habito
 from src.services.quote_service import QuoteService
 from src.services.storage import StorageService
 
@@ -27,6 +28,14 @@ def pedir_numero(mensaje: str) -> float:
             continue
         return numero
 
+def pedir_texto(mensaje: str) -> str:
+    while True:
+        texto = input(mensaje).strip()
+        if len(texto) == 0:
+            print("El mensaje esta vacio.")
+            continue
+        return texto
+
 class Menu:
     def __init__(
             self,
@@ -48,6 +57,8 @@ class Menu:
                 self._ver_resumen()
             elif opcion == "2":
                 self._registrar_progreso()
+            elif opcion == "3":
+                self._crear_habito()
             elif opcion == "6":
                 print("Hasta luego!")
                 break
@@ -107,3 +118,17 @@ class Menu:
             print("Felicidades! Completaste tu meta de hoy.")
         else:
             print("Genial! Estas mas cerca de completar tu hábito.")
+
+    def _crear_habito(self, se) -> None:
+        nombre = pedir_texto("Ingrese el nombre del habito: ")
+        meta = pedir_numero("Digite su meta: ")
+        habito = Habito(nombre, meta)
+        try:
+            self.usuario.anadir_habito(habito)
+        except ValueError as error:
+            print(error)
+            return 
+        print(
+            f"Habito: {habito.nombre} ha sido creado."
+            f"Meta: {meta.meta_diaria}"
+            )
