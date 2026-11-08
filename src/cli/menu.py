@@ -64,7 +64,8 @@ class Menu:
             elif opcion == "5":
                 self._mostrar_frase()
             elif opcion == "6":
-                print("Hasta luego!")
+                self._guardar_y_salir()
+                print("¡Hasta luego!")
                 break
             else:
                 print("Opcion no valida.")
@@ -150,3 +151,10 @@ class Menu:
         print(SEPARADOR)
         print(frase)
         print(SEPARADOR)
+
+    def _guardar_y_salir(self) -> None:
+        guardado = self.storage.guardar_usuario(self.usuario, self.filepath)
+        if guardado:
+            print("Datos guardados correctamente.")
+        else:
+            print("Error! Los datos NO se han guardado correctamente.")
