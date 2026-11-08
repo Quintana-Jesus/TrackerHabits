@@ -59,6 +59,8 @@ class Menu:
                 self._registrar_progreso()
             elif opcion == "3":
                 self._crear_habito()
+            elif opcion == "4":
+                self._eliminar_habito()
             elif opcion == "6":
                 print("Hasta luego!")
                 break
@@ -93,7 +95,7 @@ class Menu:
 
     def _registrar_progreso(self) -> None:
         if len(self.usuario.rutina) == 0:
-            print("No hay habitos. Registra primero un habito.")
+            print("No hay habitos registrados. Crea uno primero.")
             return
         nombre = input("Ingrese el nombre del habito: ").strip()
         habito_encontrado = None
@@ -128,7 +130,15 @@ class Menu:
         except ValueError as error:
             print(error)
             return 
-        print(
-            f"Habito: {habito.nombre} ha sido creado."
-            f"Meta: {meta.meta_diaria}"
-            )
+        print(f"Habito: {habito.nombre} ha sido creado. Meta: {meta.meta_diaria}")
+
+    def _eliminar_habito(self) -> None:
+        if len(self.usuario.rutina) == 0:
+            print("No hay habitos registrados. Crea uno primero.")
+            return 
+        nombre = pedir_texto("Ingrese el nombre del habito que desea eliminar: ")
+        eliminado = self.usuario.eliminar_habito(nombre)
+        if eliminado:
+            print(f"{nombre} ha sido eliminado correctamente.")
+        else:
+            print(f"{nombre} no existe en tu lista.")
