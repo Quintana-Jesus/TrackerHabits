@@ -14,10 +14,9 @@ def renderizar_barra(porcentaje: float) -> str:
     vacios = ANCHO_BARRA - llenos
     return f"[{'█'* llenos}{'░'*vacios}] {porcentaje:.1f}%"
 
-
 def pedir_numero(mensaje: str) -> float:
     while True:
-        texto = input(mensaje).strip()        
+        texto = input(mensaje).strip()
         try:
             numero = float(texto.replace(",", "."))
         except ValueError:
@@ -35,6 +34,7 @@ def pedir_texto(mensaje: str) -> str:
             print("El mensaje esta vacio.")
             continue
         return texto
+
 
 class Menu:
     def __init__(
@@ -61,6 +61,8 @@ class Menu:
                 self._crear_habito()
             elif opcion == "4":
                 self._eliminar_habito()
+            elif opcion == "5":
+                self._mostrar_frase()
             elif opcion == "6":
                 print("Hasta luego!")
                 break
@@ -130,7 +132,7 @@ class Menu:
         except ValueError as error:
             print(error)
             return 
-        print(f"Habito: {habito.nombre} ha sido creado. Meta: {meta.meta_diaria}")
+        print(f"Habito: {habito.nombre} ha sido creado. Meta: {habito.meta_diaria}")
 
     def _eliminar_habito(self) -> None:
         if len(self.usuario.rutina) == 0:
@@ -142,3 +144,9 @@ class Menu:
             print(f"{nombre} ha sido eliminado correctamente.")
         else:
             print(f"{nombre} no existe en tu lista.")
+
+    def _mostrar_frase(self) -> None:
+        frase = self.quotes.obtener_frase()
+        print(SEPARADOR)
+        print(frase)
+        print(SEPARADOR)
