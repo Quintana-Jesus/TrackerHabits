@@ -131,13 +131,13 @@ class Menu:
             self.usuario.anadir_habito(habito)
         except ValueError as error:
             print(error)
-            return 
+            return
         print(f"Habito: {habito.nombre} ha sido creado. Meta: {habito.meta_diaria}")
 
     def _eliminar_habito(self) -> None:
         if len(self.usuario.rutina) == 0:
             print("No hay habitos registrados. Crea uno primero.")
-            return 
+            return
         nombre = pedir_texto("Ingrese el nombre del habito que desea eliminar: ")
         eliminado = self.usuario.eliminar_habito(nombre)
         if eliminado:
