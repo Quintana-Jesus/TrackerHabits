@@ -50,25 +50,30 @@ class Menu:
         self.filepath = filepath
 
     def ejecutar(self) -> None:
-        while True:
-            self._mostrar_menu()
-            opcion = input("Elige una opcion: ").strip()
-            if opcion == "1":
-                self._ver_resumen()
-            elif opcion == "2":
-                self._registrar_progreso()
-            elif opcion == "3":
-                self._crear_habito()
-            elif opcion == "4":
-                self._eliminar_habito()
-            elif opcion == "5":
-                self._mostrar_frase()
-            elif opcion == "6":
-                self._guardar_y_salir()
-                print("¡Hasta luego!")
-                break
-            else:
-                print("Opcion no valida.")
+        try:
+            while True:
+                self._mostrar_menu()
+                opcion = input("Elige una opcion: ").strip()
+                if opcion == "1":
+                    self._ver_resumen()
+                elif opcion == "2":
+                    self._registrar_progreso()
+                elif opcion == "3":
+                    self._crear_habito()
+                elif opcion == "4":
+                    self._eliminar_habito()
+                elif opcion == "5":
+                    self._mostrar_frase()
+                elif opcion == "6":
+                    self._guardar_y_salir()
+                    print("Hasta luego!")
+                    break
+                else:
+                    print("Opcion no valida.")
+        except (KeyboardInterrupt, EOFError):
+            print("\n Salida interrumpida. Guardando tus datos...")
+            self._guardar_y_salir()
+            print("Hasta luego!")
 
     def _mostrar_menu(self) -> None:
         print(SEPARADOR)
