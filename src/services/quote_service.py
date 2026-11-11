@@ -4,6 +4,7 @@ URL_API = "https://zenquotes.io/api/random"
 TIMEOUT_SEGUNDOS = 3
 FRASE_POR_DEFECTO = "La constancia vence al talento cuando el talento no es constante."
 
+
 class QuoteService:
     def obtener_frase(self) -> str:
         try:

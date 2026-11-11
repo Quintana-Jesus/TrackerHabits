@@ -26,21 +26,21 @@ class Usuario:
     def obtener_porcentaje_global(self) -> float:
         if len(self.rutina) == 0:
             return 0.0
-        total=0.0
+        total = 0.0
         for habito in self.rutina:
             porcentaje = min(habito.progreso_actual / habito.meta_diaria, 1) * 100
             total += porcentaje
         return total / len(self.rutina)
 
-    def obtener_resumen_dia(self) -> dict[str, Any]: 
+    def obtener_resumen_dia(self) -> dict[str, Any]:
         total = len(self.rutina)
-        completados=0
-        pendientes=0
+        completados = 0
+        pendientes = 0
         for habito in self.rutina:
             if habito.completado:
                 completados += 1
             else:
-                pendientes+=1
+                pendientes += 1
         porcentaje = self.obtener_porcentaje_global()
         return {
             "total": total,
@@ -62,6 +62,5 @@ class Usuario:
         return cls(
             nombre=data["nombre"],
             edad=data["edad"],
-            rutina=rutina, 
+            rutina=rutina,
         )
-    

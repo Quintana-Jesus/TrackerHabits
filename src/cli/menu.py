@@ -1,8 +1,7 @@
-from src.models.usuario import Usuario
 from src.models.habito import Habito
+from src.models.usuario import Usuario
 from src.services.quote_service import QuoteService
 from src.services.storage import StorageService
-
 
 SEPARADOR = "=" * 40
 ANCHO_BARRA = 16
@@ -12,7 +11,8 @@ def renderizar_barra(porcentaje: float) -> str:
     porcentaje = max(0, min(porcentaje, 100))
     llenos = int((porcentaje * ANCHO_BARRA) / 100)
     vacios = ANCHO_BARRA - llenos
-    return f"[{'█'* llenos}{'░'*vacios}] {porcentaje:.1f}%"
+    return f"[{'█' * llenos}{'░' * vacios}] {porcentaje:.1f}%"
+
 
 def pedir_numero(mensaje: str) -> float:
     while True:
@@ -27,6 +27,7 @@ def pedir_numero(mensaje: str) -> float:
             continue
         return numero
 
+
 def pedir_texto(mensaje: str) -> str:
     while True:
         texto = input(mensaje).strip()
@@ -38,12 +39,12 @@ def pedir_texto(mensaje: str) -> str:
 
 class Menu:
     def __init__(
-            self,
-            usuario: Usuario,
-            storage: StorageService,
-            quotes: QuoteService,
-            filepath: str,
-        ) -> None:
+        self,
+        usuario: Usuario,
+        storage: StorageService,
+        quotes: QuoteService,
+        filepath: str,
+    ) -> None:
         self.usuario = usuario
         self.storage = storage
         self.quotes = quotes
@@ -114,7 +115,7 @@ class Menu:
         if habito_encontrado is None:
             print(f"{nombre} no se encuentra en tu rutina.")
             return
-        
+
         cantidad = pedir_numero("Digite la cantidad del progreso: ")
         registrado = habito_encontrado.registrar_progreso(cantidad)
         if not registrado:
