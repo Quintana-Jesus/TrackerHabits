@@ -9,6 +9,10 @@ class Habito:
     completado: bool = False
     categoria: str = "Salud" 
 
+    def __post_init__(self) -> None:
+        if self.meta_diaria <= 0:
+            raise ValueError("Error! No se puede registrar una meta con ese valor.")
+
     def registrar_progreso(self, cantidad: float) -> bool:
         if cantidad <= 0:
             return False
