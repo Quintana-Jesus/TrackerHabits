@@ -41,5 +41,5 @@ class Habito:
             meta_diaria=data["meta_diaria"],
             progreso_actual=data.get("progreso_actual", 0),
             completado=data.get("completado", False),
-            categoria=data.get("categoria"),
+            categoria=data.get("categoria", "Salud"),
         )
