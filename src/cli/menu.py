@@ -1,8 +1,7 @@
-from src.models.usuario import Usuario
 from src.models.habito import Habito
+from src.models.usuario import Usuario
 from src.services.quote_service import QuoteService
 from src.services.storage import StorageService
-
 
 SEPARADOR = "=" * 40
 ANCHO_BARRA = 16
@@ -12,7 +11,8 @@ def renderizar_barra(porcentaje: float) -> str:
     porcentaje = max(0, min(porcentaje, 100))
     llenos = int((porcentaje * ANCHO_BARRA) / 100)
     vacios = ANCHO_BARRA - llenos
-    return f"[{'█'* llenos}{'░'*vacios}] {porcentaje:.1f}%"
+    return f"[{'█' * llenos}{'░' * vacios}] {porcentaje:.1f}%"
+
 
 def pedir_numero(mensaje: str) -> float:
     while True:
@@ -20,30 +20,31 @@ def pedir_numero(mensaje: str) -> float:
         try:
             numero = float(texto.replace(",", "."))
         except ValueError:
-            print("Escribe un numero válido.")
+            print("Escribe un número válido.")
             continue
         if numero <= 0:
             print("Debe ser mayor que 0.")
             continue
         return numero
 
+
 def pedir_texto(mensaje: str) -> str:
     while True:
         texto = input(mensaje).strip()
         if len(texto) == 0:
-            print("El mensaje esta vacio.")
+            print("No puede estar vacío.")
             continue
         return texto
 
 
 class Menu:
     def __init__(
-            self,
-            usuario: Usuario,
-            storage: StorageService,
-            quotes: QuoteService,
-            filepath: str,
-        ) -> None:
+        self,
+        usuario: Usuario,
+        storage: StorageService,
+        quotes: QuoteService,
+        filepath: str,
+    ) -> None:
         self.usuario = usuario
         self.storage = storage
         self.quotes = quotes
@@ -53,7 +54,7 @@ class Menu:
         try:
             while True:
                 self._mostrar_menu()
-                opcion = input("Elige una opcion: ").strip()
+                opcion = input("Elige una opción: ").strip()
                 if opcion == "1":
                     self._ver_resumen()
                 elif opcion == "2":
@@ -66,24 +67,24 @@ class Menu:
                     self._mostrar_frase()
                 elif opcion == "6":
                     self._guardar_y_salir()
-                    print("Hasta luego!")
+                    print("¡Hasta luego!")
                     break
                 else:
-                    print("Opcion no valida.")
+                    print("Opción no válida.")
         except (KeyboardInterrupt, EOFError):
-            print("\n Salida interrumpida. Guardando tus datos...")
+            print("\nSalida interrumpida. Guardando tus datos...")
             self._guardar_y_salir()
-            print("Hasta luego!")
+            print("¡Hasta luego!")
 
     def _mostrar_menu(self) -> None:
         print(SEPARADOR)
-        print("\n  Tracker Habitos y Bienestar  \n")
+        print("\n  Tracker Hábitos y Bienestar  \n")
         print(SEPARADOR)
-        print(" 1. Ver resumen del dia")
+        print(" 1. Ver resumen del día")
         print(" 2. Registrar progreso en un hábito")
         print(" 3. Crear nuevo hábito")
         print(" 4. Eliminar hábito")
-        print(" 5. Frase motivacional del dia")
+        print(" 5. Frase motivacional del día")
         print(" 6. Guardar y salir")
         print(SEPARADOR)
 
@@ -92,7 +93,7 @@ class Menu:
         print(SEPARADOR)
         print(f"Resumen de {self.usuario.nombre}")
         print(
-            f"Habitos: {resumen['total']} | "
+            f"Hábitos: {resumen['total']} | "
             f"Completados: {resumen['completados']} | "
             f"Pendientes: {resumen['pendientes']}"
         )
@@ -103,9 +104,9 @@ class Menu:
 
     def _registrar_progreso(self) -> None:
         if len(self.usuario.rutina) == 0:
-            print("No hay habitos registrados. Crea uno primero.")
+            print("No hay hábitos registrados. Crea uno primero.")
             return
-        nombre = input("Ingrese el nombre del habito: ").strip()
+        nombre = input("Ingrese el nombre del hábito: ").strip()
         habito_encontrado = None
         for habito in self.usuario.rutina:
             if habito.nombre.lower() == nombre.lower():
@@ -114,7 +115,7 @@ class Menu:
         if habito_encontrado is None:
             print(f"{nombre} no se encuentra en tu rutina.")
             return
-        
+
         cantidad = pedir_numero("Digite la cantidad del progreso: ")
         registrado = habito_encontrado.registrar_progreso(cantidad)
         if not registrado:
@@ -125,12 +126,12 @@ class Menu:
             f"{habito_encontrado.progreso_actual}/{habito_encontrado.meta_diaria}"
         )
         if habito_encontrado.completado:
-            print("Felicidades! Completaste tu meta de hoy.")
+            print("¡Felicidades! Completaste tu meta de hoy.")
         else:
-            print("Genial! Estas mas cerca de completar tu hábito.")
+            print("¡Genial! Estás más cerca de completar tu hábito.")
 
     def _crear_habito(self) -> None:
-        nombre = pedir_texto("Ingrese el nombre del habito: ")
+        nombre = pedir_texto("Ingrese el nombre del hábito: ")
         meta = pedir_numero("Digite su meta: ")
         habito = Habito(nombre, meta)
         try:
@@ -138,13 +139,13 @@ class Menu:
         except ValueError as error:
             print(error)
             return
-        print(f"Habito: {habito.nombre} ha sido creado. Meta: {habito.meta_diaria}")
+        print(f"Hábito: {habito.nombre} ha sido creado. Meta: {habito.meta_diaria}")
 
     def _eliminar_habito(self) -> None:
         if len(self.usuario.rutina) == 0:
-            print("No hay habitos registrados. Crea uno primero.")
+            print("No hay hábitos registrados. Crea uno primero.")
             return
-        nombre = pedir_texto("Ingrese el nombre del habito que desea eliminar: ")
+        nombre = pedir_texto("Ingrese el nombre del hábito que desea eliminar: ")
         eliminado = self.usuario.eliminar_habito(nombre)
         if eliminado:
             print(f"{nombre} ha sido eliminado correctamente.")
@@ -162,4 +163,4 @@ class Menu:
         if guardado:
             print("Datos guardados correctamente.")
         else:
-            print("Error! Los datos NO se han guardado correctamente.")
+            print("¡Error! Los datos NO se han guardado correctamente.")

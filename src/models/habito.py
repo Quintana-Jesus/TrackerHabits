@@ -1,13 +1,14 @@
 from dataclasses import dataclass
 from typing import Any
 
+
 @dataclass
 class Habito:
     nombre: str
     meta_diaria: float
     progreso_actual: float = 0
     completado: bool = False
-    categoria: str = "Salud" 
+    categoria: str = "Salud"
 
     def __post_init__(self) -> None:
         if self.meta_diaria <= 0:
@@ -18,7 +19,7 @@ class Habito:
             return False
         self.progreso_actual += cantidad
         if self.progreso_actual >= self.meta_diaria:
-            self.completado=True
+            self.completado = True
         return True
 
     def resetear_dia(self) -> None:
@@ -35,7 +36,7 @@ class Habito:
         }
 
     @classmethod
-    def from_dict(cls ,data:dict[str,Any]) -> "Habito":
+    def from_dict(cls, data: dict[str, Any]) -> "Habito":
         return cls(
             nombre=data["nombre"],
             meta_diaria=data["meta_diaria"],

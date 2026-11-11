@@ -13,7 +13,7 @@ class StorageService:
         try:
             Path(filepath).parent.mkdir(parents=True, exist_ok=True)
             with open(filepath, "w", encoding="utf-8") as archivo:
-                json.dump(usuario.to_dict(), archivo, indent=4, ensure_ascii=False)  
+                json.dump(usuario.to_dict(), archivo, indent=4, ensure_ascii=False)
             return True
         except (OSError, TypeError):
             return False
