@@ -41,3 +41,11 @@ def test_habito_con_meta_cero_lanza_error() -> None:
 def test_habito_con_meta_negativa_lanza_error() -> None:
     with pytest.raises(ValueError):
         Habito("Tomar medicamento", -1)
+
+
+def test_from_dict_usa_valores_por_defecto() -> None:
+    datos = {"nombre": "Leer", "meta_diaria": 30}
+    habito = Habito.from_dict(datos)
+    assert habito.progreso_actual == 0
+    assert habito.completado is False
+    assert habito.categoria == "Salud"
