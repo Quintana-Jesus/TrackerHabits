@@ -23,5 +23,5 @@ class StorageService:
             with open(filepath, "r", encoding="utf-8") as archivo:
                 datos = json.load(archivo)
             return Usuario.from_dict(datos)
-        except (OSError, json.JSONDecodeError, KeyError, TypeError):
+        except (ValueError, OSError, json.JSONDecodeError, KeyError, TypeError):
             return Usuario("Invitado", 0)
