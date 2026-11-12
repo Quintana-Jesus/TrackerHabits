@@ -111,14 +111,16 @@ class Menu:
         )
         print(renderizar_barra(resumen["porcentaje_global"]))
         for habito in self.usuario.rutina:
-            print(f"- {habito.nombre}: {habito.progreso_actual}/{habito.meta_diaria}")
+            print(
+                f"- {habito.nombre}: {habito.progreso_actual:g}/{habito.meta_diaria:g}"
+            )
         print(SEPARADOR)
 
     def _registrar_progreso(self) -> None:
         if len(self.usuario.rutina) == 0:
             print("No hay hábitos registrados. Crea uno primero.")
             return
-        nombre = input("Ingrese el nombre del hábito: ").strip()
+        nombre = pedir_texto("Ingrese el nombre del hábito: ")
         habito_encontrado = None
         for habito in self.usuario.rutina:
             if habito.nombre.lower() == nombre.lower():
@@ -135,7 +137,7 @@ class Menu:
             return
         print(
             f"{habito_encontrado.nombre}: "
-            f"{habito_encontrado.progreso_actual}/{habito_encontrado.meta_diaria}"
+            f"{habito_encontrado.progreso_actual:g}/{habito_encontrado.meta_diaria:g}"
         )
         if habito_encontrado.completado:
             print("¡Felicidades! Completaste tu meta de hoy.")
@@ -151,7 +153,7 @@ class Menu:
         except ValueError as error:
             print(error)
             return
-        print(f"Hábito: {habito.nombre} ha sido creado. Meta: {habito.meta_diaria}")
+        print(f"Hábito: {habito.nombre} ha sido creado. Meta: {habito.meta_diaria:g}")
 
     def _eliminar_habito(self) -> None:
         if len(self.usuario.rutina) == 0:
