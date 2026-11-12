@@ -1,3 +1,5 @@
+"""Interfaz de consola: menú, barra de progreso y lectura de datos del usuario."""
+
 from src.models.habito import Habito
 from src.models.usuario import Usuario
 from src.services.quote_service import QuoteService
@@ -8,6 +10,7 @@ ANCHO_BARRA = 16
 
 
 def renderizar_barra(porcentaje: float) -> str:
+    """Devuelve una barra ASCII con el porcentaje (limitado entre 0 y 100)."""
     porcentaje = max(0, min(porcentaje, 100))
     llenos = int((porcentaje * ANCHO_BARRA) / 100)
     vacios = ANCHO_BARRA - llenos
@@ -15,6 +18,7 @@ def renderizar_barra(porcentaje: float) -> str:
 
 
 def pedir_numero(mensaje: str) -> float:
+    """Pide un número mayor que 0 y repite la pregunta hasta que sea válido."""
     while True:
         texto = input(mensaje).strip()
         try:
@@ -29,6 +33,7 @@ def pedir_numero(mensaje: str) -> float:
 
 
 def pedir_texto(mensaje: str) -> str:
+    """Pide un texto no vacío y repite la pregunta hasta que lo sea."""
     while True:
         texto = input(mensaje).strip()
         if len(texto) == 0:
@@ -38,6 +43,8 @@ def pedir_texto(mensaje: str) -> str:
 
 
 class Menu:
+    """Menú principal de la aplicación en consola."""
+
     def __init__(
         self,
         usuario: Usuario,
@@ -45,12 +52,17 @@ class Menu:
         quotes: QuoteService,
         filepath: str,
     ) -> None:
+        """Recibe el usuario y los servicios que el menú necesita para trabajar."""
         self.usuario = usuario
         self.storage = storage
         self.quotes = quotes
         self.filepath = filepath
 
     def ejecutar(self) -> None:
+        """Muestra el menú en bucle hasta elegir salir o pulsar Ctrl+C.
+
+        Guarda los datos antes de salir en ambos casos.
+        """
         try:
             while True:
                 self._mostrar_menu()
