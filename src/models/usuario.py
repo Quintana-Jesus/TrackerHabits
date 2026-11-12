@@ -9,6 +9,7 @@ from src.models.habito import Habito
 @dataclass
 class Usuario:
     """Representa un usuario con su rutina diaria."""
+
     nombre: str
     edad: int
     rutina: list[Habito] = field(default_factory=list)
