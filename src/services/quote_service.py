@@ -1,3 +1,5 @@
+"""Servicio que obtiene una frase motivacional de internet, con respaldo local."""
+
 import requests
 
 URL_API = "https://zenquotes.io/api/random"
@@ -6,7 +8,10 @@ FRASE_POR_DEFECTO = "La constancia vence al talento cuando el talento no es cons
 
 
 class QuoteService:
+    """Consulta frases motivacionales en ZenQuotes."""
+
     def obtener_frase(self) -> str:
+        """Devuelve una frase con su autor, o una frase local si no hay conexión."""
         try:
             respuesta = requests.get(URL_API, timeout=TIMEOUT_SEGUNDOS)
             respuesta.raise_for_status()
