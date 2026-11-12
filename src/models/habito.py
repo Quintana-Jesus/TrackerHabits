@@ -29,7 +29,7 @@ class Habito:
             ValueError: Si `meta_diaria` es menor o igual que 0.
         """
         if self.meta_diaria <= 0:
-            raise ValueError("Error! No se puede registrar una meta con ese valor.")
+            raise ValueError("La meta diaria debe ser mayor que 0.")
 
     def registrar_progreso(self, cantidad: float) -> bool:
         """Suma una cantidad al progreso del día y marca el hábito si llega a la meta.
